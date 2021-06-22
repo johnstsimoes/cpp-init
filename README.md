@@ -4,13 +4,15 @@ This repository contains the bare minimum to start a C++ project with GoogleTest
 2) remove GIT metadata `rm -rf .git`
 3) replace the stub classes in `src` and `test`
 
-To build and run:
+To build and test:
 ```
-./build_and_test
+cmake -S . -B build/
+cmake --build build/
+ctest --test-dir build/ --output-on-failure --verbose
 ```
 
 If you need to run an isolated test case (for example, all `BasicTests`):
 
 ```
-./runtest_only.sh BasicTests.*
+ctest --test-dir build/ --output-on-failure --verbose --gtest_filter=BasicTests.*
 ```
