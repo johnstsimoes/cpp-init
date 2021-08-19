@@ -1,21 +1,13 @@
-include(FetchContent)
-FetchContent_Declare(
-  googletest 
-  GIT_REPOSITORY https://github.com/google/googletest.git)
-
-# For Windows: Prevent overriding the parent project's compiler/linker settings
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
+find_package(GTest CONFIG REQUIRED)
 
 # Now simply link against gtest or gtest_main as needed. Eg
-add_executable(${CMAKE_PROJECT_NAME}_tst 
-                main.cpp 
+add_executable(${CMAKE_PROJECT_NAME}_tst
+                main.cpp
                 basic_tests.cpp
                 subdir/some_util_tests.cpp)
 
-target_link_libraries(${CMAKE_PROJECT_NAME}_tst 
+target_link_libraries(${CMAKE_PROJECT_NAME}_tst
                       ${CMAKE_PROJECT_NAME}_lib
-                      gtest_main)
+                      GTest)
 
 add_test(NAME ${PROJECT_NAME}_test COMMAND ${CMAKE_PROJECT_NAME}_tst)
-
